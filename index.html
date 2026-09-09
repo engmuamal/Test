@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة أور - التقديم على وظائف ميسان</title>
+    <!-- استدعاء ملف التصميم -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="header">
+        <h1>بوابة أور</h1>
+        <div>الرئيسية | الخدمات | المواقع الحكومية</div>
+    </div>
+
+    <div class="container">
+        <!-- شريط التقدم -->
+        <div class="stepper">
+            <div class="step active" id="step-nav-1"><div class="circle">1</div><div>التحقق</div></div>
+            <div class="step" id="step-nav-2"><div class="circle">2</div><div>الاستمارة</div></div>
+            <div class="step" id="step-nav-3"><div class="circle">3</div><div>المستندات</div></div>
+            <div class="step" id="step-nav-4"><div class="circle">4</div><div>ارسال الطلب</div></div>
+        </div>
+
+        <!-- السلايد الأول: إدخال الاستشارية والتحقق -->
+        <div class="slide active" id="slide-1">
+            <h3 class="section-title">التسجيل الالكتروني للوظائف الشاغرة</h3>
+            <div class="alert" id="error-msg"></div>
+            
+            <div style="background: #f1f8e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px;">
+                <strong>معلومات الإعلان الحالي (مخفية برمجياً):</strong><br>
+                الشركة: Petro China<br>
+                الاختصاصات المطلوبة: هندسة كيمياوية، هندسة نفط.
+            </div>
+
+            <div class="form-group">
+                <label>رقم الاستشارية (JBS)</label>
+                <input type="text" id="jbs-input" placeholder="أدخل رقم الاستشارية مثل: JBS222742" value="JBS222742">
+            </div>
+            
+            <button class="btn" onclick="verifyJBS()">تحقق ومتابعة</button>
+        </div>
+
+        <!-- السلايد الثاني: الاستمارة والاختصاص الدقيق -->
+        <div class="slide" id="slide-2">
+            <h3 class="section-title">معلومات الباحث عن العمل</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group"><label>الاسم الكامل</label><input type="text" id="u-name" readonly></div>
+                <div class="form-group"><label>الاختصاص العام</label><input type="text" id="u-major" readonly></div>
+                <div class="form-group"><label>الجامعة</label><input type="text" id="u-uni" readonly></div>
+                <div class="form-group"><label>رقم الهاتف</label><input type="text" id="u-phone" readonly></div>
+            </div>
+
+            <hr style="border:0; border-top:1px solid #ccc; margin: 20px 0;">
+            <h4 style="color: var(--primary-color);">الخطوة الثانية: تحديد الاختصاص الدقيق لهذه الوظيفة</h4>
+            
+            <div class="form-group">
+                <label>يرجى تحديد اختصاصك الدقيق أو مجال خبرتك (مطلوب)</label>
+                <select id="precise-major">
+                    <option value="">-- اختر من القائمة --</option>
+                    <option value="HSE">السلامة المهنية (HSE)</option>
+                    <option value="Drilling">سوائل الحفر</option>
+                    <option value="Petrochemicals">بتروكيمياويات</option>
+                    <option value="Refinery">تكرير نفط</option>
+                </select>
+            </div>
+
+            <button class="btn btn-green" onclick="goToSlide(3)">تعديل واستمرار</button>
+        </div>
+
+        <!-- السلايد الثالث: المستندات -->
+        <div class="slide" id="slide-3">
+            <h3 class="section-title">المستمسكات المطلوبة</h3>
+            <p style="text-align:center; color: #666; margin-bottom: 20px;">الرجاء إرفاق المستمسكات التالية، مع إرفاق ما يثبت تخصصك الدقيق الذي اخترته في الخطوة السابقة.</p>
+            
+            <div class="upload-grid">
+                <div class="upload-box">
+                    <label>المستمسكات والاستشارية *</label>
+                    <input type="file" style="margin-top: 10px;">
+                </div>
+                <div class="upload-box">
+                    <label>وثيقة التخرج *</label>
+                    <input type="file" style="margin-top: 10px;">
+                </div>
+                <div class="upload-box">
+                    <label>السيرة الذاتية (CV) *</label>
+                    <input type="file" style="margin-top: 10px;">
+                </div>
+                <div class="upload-box" style="border-color: var(--primary-color); background: #fff0f2;">
+                    <label style="color: var(--primary-color);">شهادة خبرة تثبت الاختصاص الدقيق (مطلوب) *</label>
+                    <input type="file" style="margin-top: 10px;">
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                <button class="btn" style="background:#666;" onclick="goToSlide(2)">السابق</button>
+                <button class="btn btn-green" onclick="goToSlide(4)">حفظ وإرسال الطلب</button>
+            </div>
+        </div>
+
+        <!-- السلايد الرابع: النهاية -->
+        <div class="slide" id="slide-4" style="text-align: center;">
+            <div style="font-size: 60px; color: var(--secondary-color); margin-bottom: 20px;">✓</div>
+            <h3 class="section-title" style="color: var(--secondary-color);">تم استلام طلبك بنجاح</h3>
+            <p>تم إرسال بياناتك إلى مديرية العمل والشؤون الاجتماعية للفرز.</p>
+        </div>
+
+    </div>
+
+    <!-- استدعاء ملفات الجافاسكريبت (يجب استدعاء قاعدة البيانات أولاً) -->
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
