@@ -2,6 +2,7 @@ function verifyJBS() {
     const inputId = document.getElementById("jbs-input").value.trim().toUpperCase();
     const errorMsg = document.getElementById("error-msg");
     
+    // البحث في قاعدة البيانات
     const user = mockDatabase.find(u => u.id === inputId);
 
     if (!user) {
@@ -16,18 +17,23 @@ function verifyJBS() {
         return;
     }
 
-    // تقسيم الاسم الرباعي لملء الحقول الأربعة تلقائياً لتسهيل الأمر
-    const nameParts = user.name.split(" ");
-    if(nameParts.length >= 4) {
-        document.getElementById("fname").value = nameParts[0];
-        document.getElementById("sname").value = nameParts[1];
-        document.getElementById("tname").value = nameParts[2];
-        document.getElementById("lname").value = nameParts[3];
+    // --- توزيع الاسم على المربعات وجعلها قابلة للتعديل ---
+    const nameParts = user.name.split(" "); 
+    document.getElementById("fname").value = nameParts[0] || ""; // الاسم الأول
+    document.getElementById("sname").value = nameParts[1] || ""; // الاسم الثاني
+    document.getElementById("tname").value = nameParts[2] || ""; // الاسم الثالث
+    
+    // إذا كان الاسم رباعياً، ضع الباقي في حقل اللقب
+    if (nameParts.length > 3) {
+        document.getElementById("lname").value = nameParts.slice(3).join(" ");
     } else {
-        document.getElementById("fname").value = user.name;
+        document.getElementById("lname").value = "";
     }
 
+    // جلب الاختصاص (هذا مقفول من الـ HTML)
     document.getElementById("u-major").value = user.major;
+    
+    // جلب الجامعة (قابلة للتعديل)
     document.getElementById("u-uni").value = user.uni;
     
     errorMsg.style.display = "none";
