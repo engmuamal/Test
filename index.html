@@ -1,165 +1,42 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة أور - التقديم على وظائف ميسان</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
-    <div class="header">
-        <h1>بوابة أور</h1>
-        <div>الرئيسية | الخدمات | المواقع الحكومية</div>
-    </div>
+:root {
+    --primary-color: #c51130;
+    --secondary-color: #2e7d32;
+    --bg-color: #f4f7f6;
+    --text-color: #333;
+    --border-color: #ccc;
+    --section-bg: #f9f9f9;
+}
 
-    <div class="container">
-        <!-- شريط التقدم -->
-        <div class="stepper">
-            <div class="step active" id="step-nav-1"><div class="circle">1</div><div>التحقق</div></div>
-            <div class="step" id="step-nav-2"><div class="circle">2</div><div>الاستمارة</div></div>
-            <div class="step" id="step-nav-3"><div class="circle">3</div><div>المستندات</div></div>
-            <div class="step" id="step-nav-4"><div class="circle">4</div><div>ارسال الطلب</div></div>
-        </div>
+body { font-family: 'Cairo', sans-serif; background-color: var(--bg-color); margin: 0; padding: 0; color: var(--text-color); }
+.header { background-color: white; padding: 15px 50px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+.header h1 { color: var(--primary-color); font-size: 24px; margin: 0; }
+.container { max-width: 900px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
-        <!-- السلايد الأول: التحقق -->
-        <div class="slide active" id="slide-1">
-            <h3 class="section-title">التسجيل الالكتروني للوظائف الشاغرة</h3>
-            <div class="alert" id="error-msg"></div>
-            
-            <div class="form-group">
-                <label>رقم الاستشارية (JBS)</label>
-                <input type="text" id="jbs-input" placeholder="أدخل رقم الاستشارية مثل: JBS222742" value="JBS222742">
-            </div>
-            
-            <button class="btn" onclick="verifyJBS()">تحقق ومتابعة</button>
-        </div>
+/* Progress Bar */
+.stepper { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; }
+.stepper::before { content: ''; position: absolute; top: 20px; left: 0; right: 0; height: 2px; background: var(--border-color); z-index: 1; }
+.step { position: relative; z-index: 2; text-align: center; flex: 1; }
+.step .circle { width: 40px; height: 40px; background: white; border: 2px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; color: var(--border-color); }
+.step.active .circle, .step.completed .circle { border-color: var(--secondary-color); background: var(--secondary-color); color: white; }
+.slide { display: none; } .slide.active { display: block; }
 
-        <!-- السلايد الثاني: الاستمارة الشاملة -->
-        <div class="slide" id="slide-2">
-            <h3 class="section-title">استمارة الباحث عن العمل</h3>
-            
-            <!-- القسم الأول: المعلومات الشخصية -->
-            <div class="form-section">
-                <h4 class="form-section-title">المعلومات الشخصية</h4>
-                <div class="form-grid-3">
-                    <div class="form-group"><label>الاسم الأول</label><input type="text" id="fname"></div>
-                    <div class="form-group"><label>الاسم الثاني</label><input type="text" id="sname"></div>
-                    <div class="form-group"><label>الاسم الثالث</label><input type="text" id="tname"></div>
-                    <div class="form-group"><label>اللقب</label><input type="text" id="lname"></div>
-                    <div class="form-group"><label>اسم الام الثلاثي</label><input type="text"></div>
-                    <div class="form-group"><label>تاريخ التولد</label><input type="date"></div>
-                    <div class="form-group">
-                        <label>الحالة الزوجية</label>
-                        <select><option>اعزب / عزباء</option><option>متزوج</option><option>مطلق</option><option>ارمل</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>الجنس</label>
-                        <select><option>ذكر</option><option>انثى</option></select>
-                    </div>
-                    <div class="form-group"><label>رقم الهاتف</label><input type="text"></div>
-                    <div class="form-group">
-                        <label>المحافظة</label>
-                        <select><option>ميسان</option></select>
-                    </div>
-                    <div class="form-group"><label>القضاء</label><input type="text" placeholder="مثال: المجر الكبير"></div>
-                    <div class="form-group"><label>الحي</label><input type="text"></div>
-                    <div class="form-group"><label>اقرب نقطة دالة</label><input type="text"></div>
-                    <div class="form-group">
-                        <label>هل المتقدم ضمن نفس منطقة العمل؟</label>
-                        <select><option>نعم</option><option>لا</option></select>
-                    </div>
-                    <div class="form-group"><label>البريد الالكتروني</label><input type="email"></div>
-                </div>
-            </div>
+/* Form Elements */
+.form-section { background: var(--section-bg); border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; margin-bottom: 25px; }
+.form-section-title { margin-top: 0; color: var(--secondary-color); border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 20px; }
+.form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.form-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
+.form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 4px; font-family: inherit; box-sizing: border-box; }
 
-            <!-- القسم الثاني: التحصيل الدراسي -->
-            <div class="form-section">
-                <h4 class="form-section-title">التحصيل الدراسي</h4>
-                <div class="form-grid-3">
-                    <div class="form-group">
-                        <label>التحصيل الدراسي</label>
-                        <select><option>بكالوريوس</option><option>دبلوم</option><option>اعدادية</option><option>متوسطة</option><option>ابتدائية</option><option>دبلوم عالي</option><option>ماجستير</option></select>
-                    </div>
-                    <div class="form-group"><label>الجامعة</label><input type="text" id="u-uni"></div>
-                    <div class="form-group"><label>الكلية</label><input type="text"></div>
-                    <div class="form-group"><label>القسم / الاختصاص العام</label><input type="text" id="u-major"></div>
-                    <div class="form-group"><label>التخصص الدقيق (مهنة)</label><input type="text" placeholder="مثال: بتروكيمياوي"></div>
-                    <div class="form-group"><label>تاريخ التخرج</label><input type="date"></div>
-                    <div class="form-group"><label>تاريخ تسجيل الاستشارية</label><input type="date"></div>
-                    <div class="form-group"><label>المهنة او الحرفة</label><input type="text"></div>
-                    <div class="form-group"><label>عدد الدورات والورش</label><input type="number" min="0" value="0"></div>
-                    <div class="form-group"><label>المعدل</label><input type="number" step="0.01"></div>
-                </div>
-            </div>
+.btn { background-color: var(--primary-color); color: white; padding: 12px 30px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-family: inherit; transition: 0.3s; }
+.btn:hover { background-color: #a00e26; }
+.btn-green { background-color: var(--secondary-color); }
+.btn-green:hover { background-color: #1b5e20; }
+.alert { padding: 15px; background-color: #ffebee; color: #c62828; border-radius: 4px; margin-bottom: 20px; display: none; }
 
-            <!-- القسم الثالث: معلومات التقديم -->
-            <div class="form-section">
-                <h4 class="form-section-title">معلومات التقديم</h4>
-                <div class="form-grid-2">
-                    <div class="form-group"><label>رقم الاعلان</label><input type="text" value="9" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group"><label>اسم الشركة</label><input type="text" value="Petro China" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group"><label>التخصص المطلوب</label><input type="text" value="هندسة بتروكيمياوي / كيمياوية / نفط" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group">
-                        <label>اللياقة البدنية</label>
-                        <select><option>جيدة</option><option>متوسطة</option><option>ضعيفة</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>هل المتقدم من الأقليات؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>مشمول بقانون ذوي الشهداء؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>مشمول بقانون ذوي الاعاقة؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>مشترك في دورات العمل؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>اللغات التي يجيدها</label>
-                    <div style="display: flex; gap: 20px;">
-                        <label><input type="checkbox" value="Arabic"> العربية</label>
-                        <label><input type="checkbox" value="English"> English</label>
-                        <label><input type="checkbox" value="Kurdish"> الكردية</label>
-                    </div>
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between;">
-                <button class="btn" style="background:#666;" onclick="goToSlide(1)">السابق</button>
-                <button class="btn btn-green" onclick="goToSlide(3)">تعديل واستمرار</button>
-            </div>
-        </div>
-
-        <!-- السلايد الثالث: المستندات (كما هو) -->
-        <div class="slide" id="slide-3">
-            <h3 class="section-title">المستمسكات المطلوبة</h3>
-            <div class="upload-grid">
-                <div class="upload-box"><label>المستمسكات والاستشارية *</label><input type="file" style="margin-top: 10px;"></div>
-                <div class="upload-box"><label>وثيقة التخرج *</label><input type="file" style="margin-top: 10px;"></div>
-                <div class="upload-box"><label>السيرة الذاتية (CV) *</label><input type="file" style="margin-top: 10px;"></div>
-                <div class="upload-box" style="border-color: var(--primary-color); background: #fff0f2;"><label style="color: var(--primary-color);">شهادات الخبرة ان وجدت *</label><input type="file" style="margin-top: 10px;"></div>
-            </div>
-            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
-                <button class="btn" style="background:#666;" onclick="goToSlide(2)">السابق</button>
-                <button class="btn btn-green" onclick="goToSlide(4)">حفظ وإرسال الطلب</button>
-            </div>
-        </div>
-
-        <!-- السلايد الرابع (كما هو) -->
-        <div class="slide" id="slide-4" style="text-align: center;">
-            <div style="font-size: 60px; color: var(--secondary-color); margin-bottom: 20px;">✓</div>
-            <h3 class="section-title" style="color: var(--secondary-color);">تم استلام طلبك بنجاح</h3>
-        </div>
-    </div>
-
-    <script src="database.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+.upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.upload-box { border: 2px dashed var(--border-color); padding: 20px; text-align: center; border-radius: 8px; background: #fafafa; }
+h3.section-title { color: var(--primary-color); text-align: center; margin-bottom: 20px; }
