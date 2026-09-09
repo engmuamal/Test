@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة أور - التقديم على وظائف ميسان</title>
-    <!-- استدعاء ملف التصميم -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,17 +22,11 @@
             <div class="step" id="step-nav-4"><div class="circle">4</div><div>ارسال الطلب</div></div>
         </div>
 
-        <!-- السلايد الأول: إدخال الاستشارية والتحقق -->
+        <!-- السلايد الأول: التحقق -->
         <div class="slide active" id="slide-1">
             <h3 class="section-title">التسجيل الالكتروني للوظائف الشاغرة</h3>
             <div class="alert" id="error-msg"></div>
             
-            <div style="background: #f1f8e9; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 14px;">
-                <strong>معلومات الإعلان الحالي (مخفية برمجياً):</strong><br>
-                الشركة: Petro China<br>
-                الاختصاصات المطلوبة: هندسة كيمياوية، هندسة نفط.
-            </div>
-
             <div class="form-group">
                 <label>رقم الاستشارية (JBS)</label>
                 <input type="text" id="jbs-input" placeholder="أدخل رقم الاستشارية مثل: JBS222742" value="JBS222742">
@@ -42,74 +35,130 @@
             <button class="btn" onclick="verifyJBS()">تحقق ومتابعة</button>
         </div>
 
-        <!-- السلايد الثاني: الاستمارة والاختصاص الدقيق -->
+        <!-- السلايد الثاني: الاستمارة الشاملة -->
         <div class="slide" id="slide-2">
-            <h3 class="section-title">معلومات الباحث عن العمل</h3>
+            <h3 class="section-title">استمارة الباحث عن العمل</h3>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                <div class="form-group"><label>الاسم الكامل</label><input type="text" id="u-name" readonly></div>
-                <div class="form-group"><label>الاختصاص العام</label><input type="text" id="u-major" readonly></div>
-                <div class="form-group"><label>الجامعة</label><input type="text" id="u-uni" readonly></div>
-                <div class="form-group"><label>رقم الهاتف</label><input type="text" id="u-phone" readonly></div>
+            <!-- القسم الأول: المعلومات الشخصية -->
+            <div class="form-section">
+                <h4 class="form-section-title">المعلومات الشخصية</h4>
+                <div class="form-grid-3">
+                    <div class="form-group"><label>الاسم الأول</label><input type="text" id="fname"></div>
+                    <div class="form-group"><label>الاسم الثاني</label><input type="text" id="sname"></div>
+                    <div class="form-group"><label>الاسم الثالث</label><input type="text" id="tname"></div>
+                    <div class="form-group"><label>اللقب</label><input type="text" id="lname"></div>
+                    <div class="form-group"><label>اسم الام الثلاثي</label><input type="text"></div>
+                    <div class="form-group"><label>تاريخ التولد</label><input type="date"></div>
+                    <div class="form-group">
+                        <label>الحالة الزوجية</label>
+                        <select><option>اعزب / عزباء</option><option>متزوج</option><option>مطلق</option><option>ارمل</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>الجنس</label>
+                        <select><option>ذكر</option><option>انثى</option></select>
+                    </div>
+                    <div class="form-group"><label>رقم الهاتف</label><input type="text"></div>
+                    <div class="form-group">
+                        <label>المحافظة</label>
+                        <select><option>ميسان</option></select>
+                    </div>
+                    <div class="form-group"><label>القضاء</label><input type="text" placeholder="مثال: المجر الكبير"></div>
+                    <div class="form-group"><label>الحي</label><input type="text"></div>
+                    <div class="form-group"><label>اقرب نقطة دالة</label><input type="text"></div>
+                    <div class="form-group">
+                        <label>هل المتقدم ضمن نفس منطقة العمل؟</label>
+                        <select><option>نعم</option><option>لا</option></select>
+                    </div>
+                    <div class="form-group"><label>البريد الالكتروني</label><input type="email"></div>
+                </div>
             </div>
 
-            <hr style="border:0; border-top:1px solid #ccc; margin: 20px 0;">
-            <h4 style="color: var(--primary-color);">الخطوة الثانية: تحديد الاختصاص الدقيق لهذه الوظيفة</h4>
-            
-            <div class="form-group">
-                <label>يرجى تحديد اختصاصك الدقيق أو مجال خبرتك (مطلوب)</label>
-                <select id="precise-major">
-                    <option value="">-- اختر من القائمة --</option>
-                    <option value="HSE">السلامة المهنية (HSE)</option>
-                    <option value="Drilling">سوائل الحفر</option>
-                    <option value="Petrochemicals">بتروكيمياويات</option>
-                    <option value="Refinery">تكرير نفط</option>
-                </select>
+            <!-- القسم الثاني: التحصيل الدراسي -->
+            <div class="form-section">
+                <h4 class="form-section-title">التحصيل الدراسي</h4>
+                <div class="form-grid-3">
+                    <div class="form-group">
+                        <label>التحصيل الدراسي</label>
+                        <select><option>بكالوريوس</option><option>دبلوم</option><option>اعدادية</option><option>متوسطة</option><option>ابتدائية</option><option>دبلوم عالي</option><option>ماجستير</option></select>
+                    </div>
+                    <div class="form-group"><label>الجامعة</label><input type="text" id="u-uni"></div>
+                    <div class="form-group"><label>الكلية</label><input type="text"></div>
+                    <div class="form-group"><label>القسم / الاختصاص العام</label><input type="text" id="u-major"></div>
+                    <div class="form-group"><label>التخصص الدقيق (مهنة)</label><input type="text" placeholder="مثال: بتروكيمياوي"></div>
+                    <div class="form-group"><label>تاريخ التخرج</label><input type="date"></div>
+                    <div class="form-group"><label>تاريخ تسجيل الاستشارية</label><input type="date"></div>
+                    <div class="form-group"><label>المهنة او الحرفة</label><input type="text"></div>
+                    <div class="form-group"><label>عدد الدورات والورش</label><input type="number" min="0" value="0"></div>
+                    <div class="form-group"><label>المعدل</label><input type="number" step="0.01"></div>
+                </div>
             </div>
 
-            <button class="btn btn-green" onclick="goToSlide(3)">تعديل واستمرار</button>
+            <!-- القسم الثالث: معلومات التقديم -->
+            <div class="form-section">
+                <h4 class="form-section-title">معلومات التقديم</h4>
+                <div class="form-grid-2">
+                    <div class="form-group"><label>رقم الاعلان</label><input type="text" value="9" readonly style="background:#e9ecef;"></div>
+                    <div class="form-group"><label>اسم الشركة</label><input type="text" value="Petro China" readonly style="background:#e9ecef;"></div>
+                    <div class="form-group"><label>التخصص المطلوب</label><input type="text" value="هندسة بتروكيمياوي / كيمياوية / نفط" readonly style="background:#e9ecef;"></div>
+                    <div class="form-group">
+                        <label>اللياقة البدنية</label>
+                        <select><option>جيدة</option><option>متوسطة</option><option>ضعيفة</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>هل المتقدم من الأقليات؟</label>
+                        <select><option>لا</option><option>نعم</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>مشمول بقانون ذوي الشهداء؟</label>
+                        <select><option>لا</option><option>نعم</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>مشمول بقانون ذوي الاعاقة؟</label>
+                        <select><option>لا</option><option>نعم</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>مشترك في دورات العمل؟</label>
+                        <select><option>لا</option><option>نعم</option></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>اللغات التي يجيدها</label>
+                    <div style="display: flex; gap: 20px;">
+                        <label><input type="checkbox" value="Arabic"> العربية</label>
+                        <label><input type="checkbox" value="English"> English</label>
+                        <label><input type="checkbox" value="Kurdish"> الكردية</label>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+                <button class="btn" style="background:#666;" onclick="goToSlide(1)">السابق</button>
+                <button class="btn btn-green" onclick="goToSlide(3)">تعديل واستمرار</button>
+            </div>
         </div>
 
-        <!-- السلايد الثالث: المستندات -->
+        <!-- السلايد الثالث: المستندات (كما هو) -->
         <div class="slide" id="slide-3">
             <h3 class="section-title">المستمسكات المطلوبة</h3>
-            <p style="text-align:center; color: #666; margin-bottom: 20px;">الرجاء إرفاق المستمسكات التالية، مع إرفاق ما يثبت تخصصك الدقيق الذي اخترته في الخطوة السابقة.</p>
-            
             <div class="upload-grid">
-                <div class="upload-box">
-                    <label>المستمسكات والاستشارية *</label>
-                    <input type="file" style="margin-top: 10px;">
-                </div>
-                <div class="upload-box">
-                    <label>وثيقة التخرج *</label>
-                    <input type="file" style="margin-top: 10px;">
-                </div>
-                <div class="upload-box">
-                    <label>السيرة الذاتية (CV) *</label>
-                    <input type="file" style="margin-top: 10px;">
-                </div>
-                <div class="upload-box" style="border-color: var(--primary-color); background: #fff0f2;">
-                    <label style="color: var(--primary-color);">شهادة خبرة تثبت الاختصاص الدقيق (مطلوب) *</label>
-                    <input type="file" style="margin-top: 10px;">
-                </div>
+                <div class="upload-box"><label>المستمسكات والاستشارية *</label><input type="file" style="margin-top: 10px;"></div>
+                <div class="upload-box"><label>وثيقة التخرج *</label><input type="file" style="margin-top: 10px;"></div>
+                <div class="upload-box"><label>السيرة الذاتية (CV) *</label><input type="file" style="margin-top: 10px;"></div>
+                <div class="upload-box" style="border-color: var(--primary-color); background: #fff0f2;"><label style="color: var(--primary-color);">شهادات الخبرة ان وجدت *</label><input type="file" style="margin-top: 10px;"></div>
             </div>
-
             <div style="margin-top: 20px; display: flex; justify-content: space-between;">
                 <button class="btn" style="background:#666;" onclick="goToSlide(2)">السابق</button>
                 <button class="btn btn-green" onclick="goToSlide(4)">حفظ وإرسال الطلب</button>
             </div>
         </div>
 
-        <!-- السلايد الرابع: النهاية -->
+        <!-- السلايد الرابع (كما هو) -->
         <div class="slide" id="slide-4" style="text-align: center;">
             <div style="font-size: 60px; color: var(--secondary-color); margin-bottom: 20px;">✓</div>
             <h3 class="section-title" style="color: var(--secondary-color);">تم استلام طلبك بنجاح</h3>
-            <p>تم إرسال بياناتك إلى مديرية العمل والشؤون الاجتماعية للفرز.</p>
         </div>
-
     </div>
 
-    <!-- استدعاء ملفات الجافاسكريبت (يجب استدعاء قاعدة البيانات أولاً) -->
     <script src="database.js"></script>
     <script src="script.js"></script>
 </body>
