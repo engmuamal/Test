@@ -2,164 +2,158 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة أور - التقديم على وظائف ميسان</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>MK11 Professional League</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 
-    <div class="header">
-        <h1>بوابة أور</h1>
-        <div>الرئيسية | الخدمات | المواقع الحكومية</div>
+    <div class="bg-gradient"></div>
+    <div class="scanlines"></div>
+    <div id="fx-overlay" class="hidden"><h1 id="fx-text">FIGHT</h1></div>
+
+    <div class="ios-header">
+        <button onclick="switchView('hof-view')" class="nav-btn gold-border">🏆 السجل التاريخي</button>
+        <h1 class="mk-logo" id="header-title">MK11 <span style="color:var(--col-gold)">LEAGUE</span></h1>
+        <button onclick="goToBracket()" class="nav-btn">الجدول</button>
     </div>
 
-    <div class="container">
-        <!-- شريط التقدم -->
-        <div class="stepper">
-            <div class="step active" id="step-nav-1"><div class="circle">1</div><div>التحقق</div></div>
-            <div class="step" id="step-nav-2"><div class="circle">2</div><div>الاستمارة</div></div>
-            <div class="step" id="step-nav-3"><div class="circle">3</div><div>المستندات</div></div>
-            <div class="step" id="step-nav-4"><div class="circle">4</div><div>ارسال الطلب</div></div>
-        </div>
-
-        <!-- السلايد الأول: التحقق -->
-        <div class="slide active" id="slide-1">
-            <h3 class="section-title">التسجيل الالكتروني للوظائف الشاغرة</h3>
-            <div class="alert" id="error-msg"></div>
+    <div id="landing-view" class="view active">
+        <div class="landing-card">
+            <h1 class="big-logo">MORTAL KOMBAT 11</h1>
+            <h3 class="sub-logo">TOURNAMENT MANAGER</h3>
             
-            <div class="form-group">
-                <label>رقم الاستشارية (JBS)</label>
-                <input type="text" id="jbs-input" placeholder="أدخل رقم الاستشارية مثل: " value="">
-            </div>
-            
-            <button class="btn" onclick="verifyJBS()">تحقق ومتابعة</button>
-        </div>
-
-        <!-- السلايد الثاني: الاستمارة الشاملة -->
-        <div class="slide" id="slide-2">
-            <h3 class="section-title">استمارة الباحث عن العمل</h3>
-            
-            <!-- القسم الأول: المعلومات الشخصية -->
-            <div class="form-section">
-                <h4 class="form-section-title">المعلومات الشخصية</h4>
-                <div class="form-grid-3">
-                    <div class="form-group"><label>الاسم الأول</label><input type="text" id="fname"></div>
-                    <div class="form-group"><label>الاسم الثاني</label><input type="text" id="sname"></div>
-                    <div class="form-group"><label>الاسم الثالث</label><input type="text" id="tname"></div>
-                    <div class="form-group"><label>اللقب</label><input type="text" id="lname"></div>
-                    <div class="form-group"><label>اسم الام الثلاثي</label><input type="text"></div>
-                    <div class="form-group"><label>تاريخ التولد</label><input type="date"></div>
-                    <div class="form-group">
-                        <label>الحالة الزوجية</label>
-                        <select><option>اعزب / عزباء</option><option>متزوج</option><option>مطلق</option><option>ارمل</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>الجنس</label>
-                        <select><option>ذكر</option><option>انثى</option></select>
-                    </div>
-                    <div class="form-group"><label>رقم الهاتف</label><input type="text"></div>
-                    <div class="form-group">
-                        <label>المحافظة</label>
-                        <select><option>ميسان</option></select>
-                    </div>
-                    <div class="form-group"><label>القضاء</label><input type="text" placeholder="مثال: المجر الكبير"></div>
-                    <div class="form-group"><label>الحي</label><input type="text"></div>
-                    <div class="form-group"><label>اقرب نقطة دالة</label><input type="text"></div>
-                    <div class="form-group">
-                        <label>هل المتقدم ضمن نفس منطقة العمل؟</label>
-                        <select><option>نعم</option><option>لا</option></select>
-                    </div>
-                    <div class="form-group"><label>البريد الالكتروني</label><input type="email"></div>
-                </div>
-            </div>
-
-            <!-- القسم الثاني: التحصيل الدراسي -->
-            <div class="form-section">
-                <h4 class="form-section-title">التحصيل الدراسي</h4>
-                <div class="form-grid-3">
-                    <div class="form-group">
-                        <label>التحصيل الدراسي</label>
-                        <select><option>بكالوريوس</option><option>دبلوم</option><option>اعدادية</option><option>متوسطة</option><option>ابتدائية</option><option>دبلوم عالي</option><option>ماجستير</option></select>
-                    </div>
-                    <div class="form-group"><label>الجامعة</label><input type="text" id="u-uni"></div>
-                    <div class="form-group"><label>الكلية</label><input type="text"></div>
-                    <div class="form-group"><label>القسم / الاختصاص العام</label><input type="text" id="u-major" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group"><label>التخصص الدقيق (مهنة)</label><input type="text" placeholder="مثال: بتروكيمياوي"></div>
-                    <div class="form-group"><label>تاريخ التخرج</label><input type="date"></div>
-                    <div class="form-group"><label>تاريخ تسجيل الاستشارية</label><input type="date"></div>
-                    <div class="form-group"><label>المهنة او الحرفة</label><input type="text"></div>
-                    <div class="form-group"><label>عدد الدورات والورش</label><input type="number" min="0" value="0"></div>
-                    <div class="form-group"><label>المعدل</label><input type="number" step="0.01"></div>
-                </div>
-            </div>
-
-            <!-- القسم الثالث: معلومات التقديم -->
-            <div class="form-section">
-                <h4 class="form-section-title">معلومات التقديم</h4>
-                <div class="form-grid-2">
-                    <div class="form-group"><label>رقم الاعلان</label><input type="text" value="9" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group"><label>اسم الشركة</label><input type="text" value="Petro China" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group"><label>التخصص المطلوب</label><input type="text" value="هندسة بتروكيمياوي / كيمياوية / نفط" readonly style="background:#e9ecef;"></div>
-                    <div class="form-group">
-                        <label>اللياقة البدنية</label>
-                        <select><option>جيدة</option><option>متوسطة</option><option>ضعيفة</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>هل المتقدم من الأقليات؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>مشمول بقانون ذوي الشهداء؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>مشمول بقانون ذوي الاعاقة؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                    <div class="form-group">
-                        <label>مشترك في دورات العمل؟</label>
-                        <select><option>لا</option><option>نعم</option></select>
-                    </div>
-                </div>
+            <div class="setup-form">
                 <div class="form-group">
-                    <label>اللغات التي يجيدها</label>
-                    <div style="display: flex; gap: 20px;">
-                        <label><input type="checkbox" value="Arabic"> العربية</label>
-                        <label><input type="checkbox" value="English"> English</label>
-                        <label><input type="checkbox" value="Kurdish"> الكردية</label>
-                    </div>
+                    <label>اسم البطولة</label>
+                    <input type="text" id="tourney-name" placeholder="مثلاً: بطولة رمضان الكبرى">
                 </div>
-            </div>
+                
+                <div class="form-group">
+                    <label>الجائزة (اختياري)</label>
+                    <input type="text" id="tourney-prize" placeholder="مثلاً: 100$ / كأس ذهبي">
+                </div>
 
-            <div style="display: flex; justify-content: space-between;">
-                <button class="btn" style="background:#666;" onclick="goToSlide(1)">السابق</button>
-                <button class="btn btn-green" onclick="goToSlide(3)">تعديل واستمرار</button>
+                <button onclick="startSetup()" class="start-main-btn">إنشاء بطولة جديدة</button>
             </div>
-        </div>
-
-        <!-- السلايد الثالث: المستندات (كما هو) -->
-        <div class="slide" id="slide-3">
-            <h3 class="section-title">المستمسكات المطلوبة</h3>
-            <div class="upload-grid">
-                <div class="upload-box"><label>المستمسكات والاستشارية *</label><input type="file" style="margin-top: 10px;"></div>
-                <div class="upload-box"><label>وثيقة التخرج *</label><input type="file" style="margin-top: 10px;"></div>
-                <div class="upload-box"><label>السيرة الذاتية (CV) *</label><input type="file" style="margin-top: 10px;"></div>
-                <div class="upload-box" style="border-color: var(--primary-color); background: #fff0f2;"><label style="color: var(--primary-color);">شهادات الخبرة ان وجدت *</label><input type="file" style="margin-top: 10px;"></div>
-            </div>
-            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
-                <button class="btn" style="background:#666;" onclick="goToSlide(2)">السابق</button>
-                <button class="btn btn-green" onclick="goToSlide(4)">حفظ وإرسال الطلب</button>
-            </div>
-        </div>
-
-        <!-- السلايد الرابع (كما هو) -->
-        <div class="slide" id="slide-4" style="text-align: center;">
-            <div style="font-size: 60px; color: var(--secondary-color); margin-bottom: 20px;">✓</div>
-            <h3 class="section-title" style="color: var(--secondary-color);">تم استلام طلبك بنجاح</h3>
         </div>
     </div>
 
-    <script src="database.js"></script>
+    <div id="setup-view" class="view">
+        <h2 class="view-title" id="setup-title-display">SELECT KOMBATANTS</h2>
+        
+        <div class="input-container">
+            <input type="text" id="player-input" placeholder="اسم المقاتل..." onkeypress="handleEnter(event)">
+            <button onclick="addPlayer()" class="add-btn">ADD</button>
+        </div>
+
+        <div class="kombat-grid" id="kombat-grid"></div>
+
+        <div class="footer-bar">
+            <span id="player-count">0 PLAYERS</span>
+            <button onclick="initDrawCeremony()" class="start-btn" id="start-btn" disabled>START DRAW</button>
+        </div>
+    </div>
+
+    <div id="draw-view" class="view">
+        <div class="draw-container">
+            <div class="draw-header"><span id="draw-match-num">MATCH #1</span></div>
+            <div class="draw-arena">
+                <div class="draw-side side-green" id="side-p1">
+                    <div class="side-label">PLAYER 1</div>
+                    <div class="draw-box name-box"><div class="rolling-text" id="roll-p1-name">???</div></div>
+                    <div class="draw-box char-box"><div class="rolling-text char-font" id="roll-p1-char">???</div></div>
+                </div>
+                <div class="vs-center"><span class="vs-text">VS</span></div>
+                <div class="draw-side side-red" id="side-p2">
+                    <div class="side-label">PLAYER 2</div>
+                    <div class="draw-box name-box"><div class="rolling-text" id="roll-p2-name">???</div></div>
+                    <div class="draw-box char-box"><div class="rolling-text char-font" id="roll-p2-char">???</div></div>
+                </div>
+            </div>
+            <div class="draw-controls">
+                <button id="draw-action-btn" class="ios-btn-action" onclick="handleDrawStep()">سحب الاسم الأول</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bracket-view" class="view">
+        <div class="bracket-wrapper">
+            <div class="trophy-bg">🏆</div>
+            <div class="bracket-tree" id="bracket-tree-container"></div>
+        </div>
+    </div>
+
+    <div id="match-view" class="view">
+        <div class="arena-card">
+            <div class="arena-header"><span id="match-phase-badge">FINAL</span></div>
+            <div class="fighters-row">
+                <div class="fighter-card p1">
+                    <div class="fighter-name" id="p1-name">...</div>
+                    <div class="fighter-char" id="p1-char">...</div>
+                    <div class="fighter-score" id="p1-score">0</div>
+                </div>
+                <div class="vs-badge">VS</div>
+                <div class="fighter-card p2">
+                    <div class="fighter-name" id="p2-name">...</div>
+                    <div class="fighter-char" id="p2-char">...</div>
+                    <div class="fighter-score" id="p2-score">0</div>
+                </div>
+            </div>
+            <div class="rounds-section">
+                <div class="round-strip" id="round-1-strip"><div class="r-chk p1-chk" id="r1-p1" onclick="triggerRoundWin(1,'p1')"></div><span class="r-title">ROUND 1</span><div class="r-chk p2-chk" id="r1-p2" onclick="triggerRoundWin(1,'p2')"></div></div>
+                <div class="round-strip" id="round-2-strip"><div class="r-chk p1-chk" id="r2-p1" onclick="triggerRoundWin(2,'p1')"></div><span class="r-title">ROUND 2</span><div class="r-chk p2-chk" id="r2-p2" onclick="triggerRoundWin(2,'p2')"></div></div>
+                <div class="round-strip hidden" id="round-3-strip"><div class="r-chk p1-chk" id="r3-p1" onclick="triggerRoundWin(3,'p1')"></div><span class="r-title gold-text">FINAL ROUND</span><div class="r-chk p2-chk" id="r3-p2" onclick="triggerRoundWin(3,'p2')"></div></div>
+            </div>
+            <div class="arena-footer">
+                <button onclick="confirmMatchResult()" class="finish-btn hidden" id="finish-match-btn">FINISH HIM</button>
+                <button onclick="closeMatch()" class="back-btn">عودة</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="champion-view" class="view">
+        <div class="glass-card champion-card">
+            <div class="trophy-icon">🏆</div>
+            <h2 class="champ-label">THE CHAMPION</h2>
+            <h1 id="champion-name" class="neon-champ">NAME</h1>
+            <h3 id="champion-char" class="mk-font-gold">CHAR</h3>
+            <div class="prize-display" id="prize-display"></div>
+            <button onclick="saveToHistory()" class="start-btn">حفظ في السجل وإنهاء</button>
+        </div>
+    </div>
+
+    <div id="hof-view" class="view">
+        <div class="hof-header">
+            <h2 class="mk-font-gold">سجل الأبطال (HALL OF FAME)</h2>
+            <button onclick="clearHistory()" class="text-btn-small">مسح البيانات</button>
+        </div>
+        
+        <div class="table-container">
+            <table class="hof-table">
+                <thead>
+                    <tr>
+                        <th>الترتيب</th>
+                        <th>اسم اللاعب</th>
+                        <th>الألقاب 🏆</th>
+                        <th>نهائيات 🏁</th>
+                        <th>الجوائز 🎁</th>
+                    </tr>
+                </thead>
+                <tbody id="hof-tbody">
+                    </tbody>
+            </table>
+        </div>
+
+        <div style="text-align:center; margin-top:30px;">
+            <button onclick="location.reload()" class="back-btn">القائمة الرئيسية</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
